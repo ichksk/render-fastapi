@@ -5,7 +5,7 @@ sys.path.append(os.path.abspath(os.path.dirname(os.path.abspath(__file__)))) #sr
 from typing import Optional
 
 from fastapi import FastAPI, WebSocket
-from app.ws import updater
+from ws import updater
 
 app = FastAPI()
 
