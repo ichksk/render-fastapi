@@ -9,7 +9,7 @@ from fastapi import FastAPI, WebSocket
 from sqlmodel import create_engine, SQLModel
 from ws import updater
 
-engine = create_engine(os.environ["DATABASE_URL"])
+engine = create_engine(os.environ["DATABASE_URL"], echo=True)
 def create_db():
     SQLModel.metadata.create_all(engine)
 
