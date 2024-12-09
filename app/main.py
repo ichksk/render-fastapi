@@ -3,15 +3,22 @@ import sys
 sys.path.append(os.path.abspath(os.path.dirname(os.path.abspath(__file__)))) #srcを絶対importできるようにする
 
 from typing import Optional
+from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, WebSocket
+from sqlmodel import create_engine, SQLModel
 from ws import updater
 
+engine = create_engine(os.environ["DATABASE_URL"])
+def create_db():
+    SQLModel.metadata.create_all(engine)
 
-print(os.environ["DATABASE_URL"])
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    create_db()
+    yield
 
-app = FastAPI()
-
+app = FastAPI(lifespan=lifespan)
 
 @app.get("/")
 def read_root():
