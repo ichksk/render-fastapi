@@ -14,8 +14,13 @@ print(os.environ["DATABASE_URL"])
 def create_db():
     SQLModel.metadata.create_all(engine)
 
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    print("startup event")
+    yield
+    print("shutdown event")
 
-app = FastAPI()
+app = FastAPI(lifespan=lifespan)
 
 @app.get("/")
 def read_root():
