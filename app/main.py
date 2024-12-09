@@ -1,7 +1,11 @@
+import os
+import sys
+sys.path.append(os.path.abspath(os.path.dirname(os.path.abspath(__file__)))) #srcを絶対importできるようにする
+
 from typing import Optional
 
 from fastapi import FastAPI, WebSocket
-from .ws import updater
+from app.ws import updater
 
 app = FastAPI()
 
