@@ -7,6 +7,9 @@ from typing import Optional
 from fastapi import FastAPI, WebSocket
 from ws import updater
 
+
+print(os.environ["DATABASE_URL"])
+
 app = FastAPI()
 
 
