@@ -10,6 +10,10 @@ from sqlmodel import create_engine, SQLModel
 from ws import updater
 
 engine = create_engine(os.environ["DATABASE_URL"], echo=True)
+print(os.environ["DATABASE_URL"])
+def create_db():
+    SQLModel.metadata.create_all(engine)
+
 
 app = FastAPI()
 
